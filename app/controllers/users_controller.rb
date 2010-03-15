@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   # GET /users
   def index
     @users = User.all
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
 
     if @user.save
       if params[:user][:avatar].present?
-        render :action => 'cropping'
+        render :action => 'crop'
       else
         flash[:notice] = 'User was successfully created.'
         redirect_to(@user)
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(params[:user])
       if params[:user][:avatar].present?
-        render :action => 'cropping'
+        render :action => 'crop'
       else
         flash[:notice] = 'User was successfully updated.'
         redirect_to(@user)
@@ -58,4 +59,10 @@ class UsersController < ApplicationController
 
     redirect_to(users_url)
   end
+
+  # GET /users/1/crop
+  def crop
+    @user = User.find(params[:id])
+  end
+
 end

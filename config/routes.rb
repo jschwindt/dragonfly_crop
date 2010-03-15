@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users
+  map.resources :users, :member => { :crop => :get }
 
   map.root :controller => :users, :action => :index
   
