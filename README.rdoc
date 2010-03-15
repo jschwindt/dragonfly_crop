@@ -18,4 +18,8 @@ It follows the same idea of my previous project RJCROP: http://github.com/jschwi
  ./script/server
 
 
+==Author
+
+*Juan* *Schwindt*
+juan(at)schwindt.org
 
