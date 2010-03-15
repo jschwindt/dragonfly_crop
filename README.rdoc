@@ -1,0 +1,19 @@
+=Dragonfly crop
+
+This project shows how to crop images using Jquery's Jcrop and the new
+kid in the block for handling images in Rails: Dragonfly.
+
+It follows the same idea of my previous project RJCROP.
+
+==How to download and run
+
+git clone git://github.com/jschwindt/dragonfly_crop.git
+
+cd dragonfly_crop
+
+sudo rake gems:install
+rake db:migrate
+./script/server
+
+
+
