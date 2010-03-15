@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <%= image_tag @user.avatar.url(@user.avatar_cropping) %> <br />
+  <%= image_tag @user.avatar.url('400x') %> 
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

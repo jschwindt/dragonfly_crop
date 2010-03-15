@@ -1,0 +1,56 @@
+<% content_for :headers do %>
+<%= javascript_include_tag 'jquery.min', 'jquery.Jcrop.min' %>
+<%= stylesheet_link_tag 'jquery.Jcrop' %>
+<script language="Javascript">
+
+function showPreview(coords)
+{
+  var aspect_ratio = <%= @user.avatar_width %> / <%= @user.avatar_height %>;
+  var multplier = <%= 1.0 * @user.avatar_width / User::CROP_W %>;
+  var crop_str = Math.round(coords.x * multplier) + ':' + Math.round(coords.y * multplier) + ':' +
+                 Math.round(coords.w * multplier) + 'x' + Math.round(coords.h * multplier) +
+                 '<%= "=>#{User::THUMB_W }x#{User::THUMB_H }" %>'; 
+  $('#avatar_cropping').val(crop_str);
+
+  var rx = <%= User::THUMB_W %> / coords.w ;
+  var ry = <%= User::THUMB_H %> / coords.h;
+  $('#preview').css({
+    width: Math.round(rx * <%= User::CROP_W %>) + 'px',
+    height: Math.round(ry * <%= User::CROP_W * @user.avatar_height / @user.avatar_width %>) + 'px',
+    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+  });
+}
+
+$(function() {
+  $('#cropbox').Jcrop({
+      onSelect: showPreview,
+      onChange: showPreview,
+      setSelect:   [ 0, 0, 240, 240 ],
+      aspectRatio: <%= User::THUMB_W %>/<%= User::THUMB_H %>
+    });
+});
+
+</script>
+<% end %>
+
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <b>Avatar:</b>
+  <%= image_tag @user.avatar.url("#{User::CROP_W}x"), :id => 'cropbox' %>
+<div style="width:<%= User::THUMB_W %>px;height:<%= User::THUMB_H %>px;overflow:hidden">
+  <%= image_tag @user.avatar.url("#{User::CROP_W}x"), :id => 'preview' %>
+</div>
+</p>
+
+<% form_for @user do |f| %>
+  <%= f.text_field :avatar_cropping, :id => 'avatar_cropping' %><br />
+  <%= f.submit "Crop!" %>
+<% end %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
