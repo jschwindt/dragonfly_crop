@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :avatar_width
       t.integer :avatar_height
       t.string  :avatar_cropping
-      
+
       t.timestamps
     end
   end

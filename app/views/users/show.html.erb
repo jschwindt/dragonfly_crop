@@ -1,11 +1,11 @@
 <p>
   <b>Name:</b>
-  <%=h @user.name %>
+  <%= @user.name %>
 </p>
 
 <p>
-  <%= image_tag @user.avatar.url(@user.avatar_cropping) %> <br />
-  <%= image_tag @user.avatar.url('400x') %> 
+  <%= image_tag @user.avatar.process(:crop, @user.crop_hash).thumb("#{User::THUMB_W}x#{User::THUMB_H}").url, :alt => 'small_avatar' %> <br />
+  <%= image_tag @user.avatar.thumb('400x').url, :alt => 'crop_image' %> 
 </p>
 
 
