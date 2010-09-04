@@ -4,7 +4,7 @@
 </p>
 
 <p>
-  <%= image_tag @user.avatar.custom_crop(@user.avatar_cropping).thumb("#{User::THUMB_W}x#{User::THUMB_H}").url, :alt => 'small_avatar' %> <br />
+  <%= image_tag @user.avatar.thumb(@user.avatar_cropping).thumb("#{User::THUMB_W}x#{User::THUMB_H}").url, :alt => 'small_avatar' %> <br />
   <%= image_tag @user.avatar.thumb('400x').url, :alt => 'crop_image' %> 
 </p>
 

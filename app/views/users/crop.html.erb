@@ -6,9 +6,9 @@
 function showPreview(coords)
 {
   var aspect_ratio = <%= @user.avatar_width %> / <%= @user.avatar_height %>;
-  var multplier = <%= 1.0 * @user.avatar_width / User::CROP_W %>;
-  var crop_str = Math.round(coords.x * multplier) + ':' + Math.round(coords.y * multplier) + ':' +
-                 Math.round(coords.w * multplier) + 'x' + Math.round(coords.h * multplier); 
+  var scale = <%= 1.0 * @user.avatar_width / User::CROP_W %>;
+  var crop_str = Math.round(coords.w * scale) + 'x' + Math.round(coords.h * scale) +
+           '+' + Math.round(coords.x * scale) + '+' + Math.round(coords.y * scale);
   $('#avatar_cropping').val(crop_str);
 
   var rx = <%= User::THUMB_W %> / coords.w ;
